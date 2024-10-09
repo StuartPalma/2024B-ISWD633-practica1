@@ -89,7 +89,7 @@ docker images
 ```
 
 # COLOCAR UNA CAPTURA DE PANTALLA DEL RESULTADO 
-
+![Imagen](img/listado)
 
 **Identificadores**
 
@@ -105,10 +105,70 @@ docker inspect <nombre imagen>:<tag>
 
 Inspeccionar la imagen hello-world 
 # COMPLETAR
-
+````
+docker inspect hello-world
+[
+    {
+        "Id": "sha256:91fb4b041da273d5a3273b6d587d62d518300a6ad268b28628f74997b93171b2",
+        "RepoTags": [
+            "hello-world:latest"
+        ],
+        "RepoDigests": [
+            "hello-world@sha256:91fb4b041da273d5a3273b6d587d62d518300a6ad268b28628f74997b93171b2"
+        ],
+        "Parent": "",
+        "Comment": "buildkit.dockerfile.v0",
+        "Created": "2023-05-02T16:49:27Z",
+        "DockerVersion": "27.2.0",
+        "Author": "",
+        "Config": {
+            "Hostname": "",
+            "Domainname": "",
+            "User": "",
+            "AttachStdin": false,
+            "AttachStdout": false,
+            "AttachStderr": false,
+            "Tty": false,
+            "OpenStdin": false,
+            "StdinOnce": false,
+            "Env": [
+                "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+            ],
+            "Cmd": [
+                "/hello"
+            ],
+            "ArgsEscaped": true,
+            "Image": "",
+            "Volumes": null,
+            "WorkingDir": "/",
+            "Entrypoint": null,
+            "OnBuild": null,
+            "Labels": null
+        },
+        "Architecture": "amd64",
+        "Os": "linux",
+        "Size": 15288,
+        "GraphDriver": {
+            "Data": null,
+            "Name": "overlayfs"
+        },
+        "RootFS": {
+            "Type": "layers",
+            "Layers": [
+                "sha256:ac28800ec8bb38d5c35b49d45a6ac4777544941199075dff8c4eb63e093aa81e"
+            ]
+        },
+        "Metadata": {
+            "LastTagTime": "2024-10-09T22:00:06.318171078Z"
+        }
+    }
+]
+````
 **¿Con qué algoritmo se está generando el ID de la imagen**
 # COMPLETAR
-
+````
+Se esta generando con sha256
+````
 ### Filtrar imágenes
 
 ```
@@ -125,6 +185,23 @@ docker rmi <nombre imagen>:<tag>
 
 Eliminar la imagen hello-world 
 # COMPLETAR
+````
+PS C:\Users\User> docker rmi hello-world
+Error response from daemon: conflict: unable to delete hello-world:latest (must be forced) - container cc9c1d27ed2d is using its referenced image 91fb4b041da2
+PS C:\Users\User> docker ps -a 
+CONTAINER ID   IMAGE         COMMAND                  CREATED          STATUS                      PORTS     NAMES
+1883dd500d41   nginx         "/docker-entrypoint.…"   10 minutes ago   Exited (0) 9 minutes ago            
+  peaceful_nightingale
+cc9c1d27ed2d   hello-world   "/hello"                 18 minutes ago   Exited (0) 18 minutes ago           
+  naughty_feynman
+PS C:\Users\User> ^C
+PS C:\Users\User> docker rm cc9c1d27ed2d
+cc9c1d27ed2d
+PS C:\Users\User> docker rmi hello-world 
+Untagged: hello-world:latest
+Deleted: sha256:91fb4b041da273d5a3273b6d587d62d518300a6ad268b28628f74997b93171b2
+PS C:\Users\User>
+````
 
 -f: Es la opción para forzar la eliminación de la imagen incluso si hay contenedores en ejecución que utilizan esa imagen.
 Cuando eliminas una imagen Docker, Docker no elimina automáticamente los contenedores que se han creado a partir de esa imagen. Esto significa que, aunque hayas eliminado la imagen, el contenedor seguirá ejecutándose normalmente.  
