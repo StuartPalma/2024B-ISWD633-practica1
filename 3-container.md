@@ -152,7 +152,12 @@ CONTAINER ID   IMAGE          COMMAND                  CREATED          STATUS  
 ````
 
 ### Para inspecionar un contenedor 
+````
+autoria stuart Palma
+Para inspeccionas un contenedor el comando que se utiliza es el siguiente:
+docker inspect <nombre_contenedor>
 
+````
 Inspeccionar el contenedor **srv-web** 
 # COMPLETAR
 ````
